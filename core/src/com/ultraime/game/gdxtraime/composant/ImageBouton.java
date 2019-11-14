@@ -20,24 +20,21 @@ public class ImageBouton {
 	// pour les boutons
 	public static Texture getBtnOver(final int typeElement) {
 		if (btnOver[1] == null) {
-			btnOver[Bouton.CLASSIQUE] = new Texture(Gdx.files.internal("bouton/btn_over.png"));
-			btnOver[Bouton.CARRE_50PX] = new Texture(Gdx.files.internal("bouton/btn_carre_50px_over.png"));
+			btnOver[Bouton.CLASSIQUE] = new Texture(Gdx.files.internal("images/bouton/btn_over.png"));
 		}
 		return btnOver[typeElement];
 	}
 
 	public static Texture getBtnClique(final int typeElement) {
 		if (btnClique[1] == null) {
-			btnClique[Bouton.CLASSIQUE] = new Texture(Gdx.files.internal("bouton/btn_clique.png"));
-			btnClique[Bouton.CARRE_50PX] = new Texture(Gdx.files.internal("bouton/btn_carre_50px_clique.png"));
+			btnClique[Bouton.CLASSIQUE] = new Texture(Gdx.files.internal("images/bouton/btn_clique.png"));
 		}
 		return btnClique[typeElement];
 	}
 
 	public static Texture getBtnNormal(final int typeElement) {
 		if (btnNormal[1] == null) {
-			btnNormal[Bouton.CLASSIQUE] = new Texture(Gdx.files.internal("bouton/btn_normal.png"));
-			btnNormal[Bouton.CARRE_50PX] = new Texture(Gdx.files.internal("bouton/btn_carre_50px_normal.png"));
+			btnNormal[Bouton.CLASSIQUE] = new Texture(Gdx.files.internal("images/bouton/btn_normal.png"));
 		}
 		return btnNormal[typeElement];
 	}

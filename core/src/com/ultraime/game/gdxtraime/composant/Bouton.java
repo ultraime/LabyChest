@@ -8,13 +8,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.ultraime.game.utile.Image;
-import com.ultraime.game.utile.Parametre;
-import com.ultraime.game.utile.VariableCommune;
+import com.ultraime.game.gdxtraime.parametrage.Parametre;
 
 public class Bouton {
 	public static final int CLASSIQUE = 1;
-	public static final int CARRE_50PX = 2;
 
 	public static final int RECT_3_PART_1 = 6;
 	public static final int RECT_3_PART_2 = 7;
@@ -94,7 +91,8 @@ public class Bouton {
 
 		this.label = label;
 
-		this.bitmapFont = new BitmapFont(Gdx.files.internal(Parametre.FONT), false);
+		this.bitmapFont = new BitmapFont(Gdx.files.internal(Parametre.FONT),
+				false);
 		initSpriteSelection();
 		modifierSprite(typeBouton);
 
