@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.QueryCallback;
 import com.badlogic.gdx.physics.box2d.World;
+import com.ultraime.game.gdxtraime.entite.EntiteVivante;
 import com.ultraime.game.gdxtraime.parametrage.Parametre;
 
 public class Monde {
@@ -63,7 +64,7 @@ public class Monde {
 
 	public Body recupererBodyFromEntite(final EntiteVivante entiteVivante) {
 		Body retourBody = null;
-		ArrayList<Body> bodies = Monde.getInstance().bodiesEntiteVivant;
+		ArrayList<Body> bodies = bodiesEntiteVivant;
 		for (int i = 0; i < bodies.size(); i++) {
 			final Body body = bodies.get(i);
 			if (body.getUserData() instanceof EntiteVivante) {
