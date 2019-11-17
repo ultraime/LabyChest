@@ -20,7 +20,7 @@ public class EcranPrincipal extends Ecran {
 
 	@Override
 	public void create(final EcranManagerAbstract ecranManager) {
-		this.ecranManager = ecranManager;
+		this.ecranManager = (EcranManager) ecranManager;
 		this.batch = new SpriteBatch();
 		String label = "Lancer partie Test";
 		this.boutonStartPartieTest = new Bouton(Parametre.x(752), Parametre.y(780), Parametre.x(300), Parametre.y(50),
@@ -70,10 +70,13 @@ public class EcranPrincipal extends Ecran {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		boolean isClique;
-		isClique = this.boutonStartPartieTest.isClique(screenX, screenY);
-		isClique = this.boutonStartPartie.isClique(screenX, screenY);
-		isClique = this.boutonLoadPartie.isClique(screenX, screenY);
+
+		this.boutonStartPartieTest.isClique(screenX, screenY);
+		if (this.boutonStartPartie.isClique(screenX, screenY)) {
+			this.ecranManager.ecranLaby.create(this.ecranManager);
+			this.ecranManager.initialiserEcran(this.ecranManager.ecranLaby);
+		}
+		this.boutonLoadPartie.isClique(screenX, screenY);
 
 		return false;
 	}

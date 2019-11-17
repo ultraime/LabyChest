@@ -5,16 +5,16 @@ public class EntiteStatic extends Entite {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int largeur;
-	private int hauteur;
+	private float largeur;
+	private float hauteur;
 
-	public EntiteStatic(float x, float y, int largeur, int hauteur) {
+	public EntiteStatic(float x, float y, float largeur, float hauteur) {
 		super(x, y);
 		this.largeur = largeur;
 		this.hauteur = hauteur;
 	}
 
-	public int getLargeur() {
+	public float getLargeur() {
 		return largeur;
 	}
 
@@ -22,7 +22,7 @@ public class EntiteStatic extends Entite {
 		this.largeur = largeur;
 	}
 
-	public int getHauteur() {
+	public float getHauteur() {
 		return hauteur;
 	}
 

@@ -15,7 +15,7 @@ public class AnimationManager implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	// Animation spécifique
-	protected transient Animation animation[];
+	protected transient Animation<TextureRegion> animation[];
 	protected transient TextureRegion regionCourante;
 	protected float largeur;
 	protected float hauteur;
@@ -86,6 +86,7 @@ public class AnimationManager implements Serializable {
 	 * @param hauteur
 	 * @param vitesseAnimation
 	 */
+	@SuppressWarnings("unchecked")
 	public void creerAnimation(Texture texture, float largeur, float hauteur, float vitesseAnimation) {
 		int largeur_texture = texture.getWidth();
 		int hauteur_texture = texture.getHeight();
@@ -98,7 +99,7 @@ public class AnimationManager implements Serializable {
 				hauteur_texture / nbHauteurImage);
 		this.animation = new Animation[nbHauteurImage];
 		for (int i = 0; i < nbHauteurImage; i++) {
-			this.animation[i] = new Animation(vitesseAnimation, tmp[i]);
+			this.animation[i] = new Animation<TextureRegion>(vitesseAnimation, tmp[i]);
 		}
 		this.regionCourante = (TextureRegion) this.animation[0].getKeyFrame(0, true);
 	}

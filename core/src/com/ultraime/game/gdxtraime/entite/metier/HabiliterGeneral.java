@@ -2,14 +2,7 @@ package com.ultraime.game.gdxtraime.entite.metier;
 
 import java.io.Serializable;
 
-import com.ultraime.game.gdxtraime.entite.EntiteVivante.TypeEntiteVivante;
-
 public class HabiliterGeneral implements Serializable {
-
-	/**
-	 * Pour les stats de base
-	 */
-	public TypeEntiteVivante type;
 
 	public transient static final int GAIN = 0;
 	public transient static final int ACTUEL = 1;
@@ -20,7 +13,9 @@ public class HabiliterGeneral implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	// stat de base
-	public float vitesse = 4f;// 3f
+	public float vitesse = 8f;// 3f
+	public float acceleration = 10f;
+	public float saut = 270f;
 	public int sante[];
 	public int energie[];
 
@@ -31,7 +26,6 @@ public class HabiliterGeneral implements Serializable {
 
 	public HabiliterGeneral(final HabiliterGeneral habiliter) {
 		this();
-		this.type = habiliter.type;
 		initStatAvecHabiliter(habiliter);
 
 	}

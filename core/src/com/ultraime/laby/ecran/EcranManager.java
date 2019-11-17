@@ -8,7 +8,7 @@ import com.ultraime.game.gdxtraime.parametrage.Parametre;
 public class EcranManager extends EcranManagerAbstract {
 
 	public EcranPrincipal ecranPrincipal;
-
+	public EcranLaby ecranLaby;
 	@Override
 	public void create() {
 		Parametre.initLangue();
@@ -17,6 +17,9 @@ public class EcranManager extends EcranManagerAbstract {
 
 		ecranPrincipal = new EcranPrincipal();
 		initialiserEcran(ecranPrincipal);
+	
+		ecranLaby = new EcranLaby();
+		
 		ecranActuel.create(this);
 
 	}

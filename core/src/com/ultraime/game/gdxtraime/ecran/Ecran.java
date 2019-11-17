@@ -3,6 +3,7 @@ package com.ultraime.game.gdxtraime.ecran;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.ultraime.laby.ecran.EcranManager;
 
 public abstract class Ecran implements InputProcessor {
 	public SpriteBatch batch;
@@ -10,7 +11,7 @@ public abstract class Ecran implements InputProcessor {
 	/**
 	 * Le manager qui gère l'écran
 	 */
-	public EcranManagerAbstract ecranManager;
+	public EcranManager ecranManager;
 
 	/**
 	 * Appelée dès que l'écran est changé.

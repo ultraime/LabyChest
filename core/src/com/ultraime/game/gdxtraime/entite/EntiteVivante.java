@@ -7,14 +7,12 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
+import com.ultraime.game.gdxtraime.animation.AnimationManager;
 import com.ultraime.game.gdxtraime.entite.metier.ActionEntite;
 import com.ultraime.game.gdxtraime.entite.metier.HabiliterGeneral;
-import com.ultraime.game.gdxtraime.monde.Monde;
 import com.ultraime.game.gdxtraime.pathfinding.Noeud;
 
-public abstract class EntiteVivante extends Entite implements Serializable {
+public class EntiteVivante extends Entite implements Serializable {
 	/**
 	 * 
 	 */
@@ -23,10 +21,6 @@ public abstract class EntiteVivante extends Entite implements Serializable {
 	transient public static final int GAUCHE = 1;
 	transient public static final int DROITE = 2;
 	transient public static final int HAUT = 3;
-
-	public static enum TypeEntiteVivante {
-		PERSONNAGE, ZOMBIE, POULE
-	}
 
 	public static enum TypeShape {
 		CERCLE, RECTANGLE
@@ -43,11 +37,9 @@ public abstract class EntiteVivante extends Entite implements Serializable {
 	// pour le deplacement
 	private ArrayDeque<Noeud> listeDeNoeudDeplacement;
 	private List<ActionEntite> listeAction;
-	private ActionEntite actionEntite = null;
 
 	// élément propre au entité
 	public HabiliterGeneral habiliter;
-	protected TypeEntiteVivante typeEntiteEnum;
 
 	// etat de l'entite
 	public Etat etat = Etat.NORMAL;
@@ -59,22 +51,18 @@ public abstract class EntiteVivante extends Entite implements Serializable {
 	// Autre
 	public String prenom = "Prenom par defaut";
 
-	protected abstract void creerAnimation();
-
 	/**
 	 * @param x
 	 * @param y
 	 * @param radius
 	 */
-	public EntiteVivante(final float x, final float y, final float radius, final TypeEntiteVivante typeEntite) {
+	public EntiteVivante(final float x, final float y, final float radius) {
 		super(x, y);
 		this.listeDeNoeudDeplacement = new ArrayDeque<Noeud>();
 		this.listeAction = new ArrayList<ActionEntite>();
 		this.typeShape = TypeShape.CERCLE;
 		this.cercleShape = new Circle(x, y, radius);
 		this.habiliter = new HabiliterGeneral();
-		this.typeEntiteEnum = typeEntite;
-		creerAnimation();
 	}
 
 	/**
@@ -83,7 +71,7 @@ public abstract class EntiteVivante extends Entite implements Serializable {
 	 * @param posY
 	 */
 	public void render(final SpriteBatch batch, final float posX, final float posY) {
-		this.animationManager.render(batch, posX, posY, this.direction);
+		// this.animationManager.render(batch, posX, posY, this.direction);
 	}
 
 	public List<ActionEntite> getListeAction() {
