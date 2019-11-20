@@ -75,6 +75,7 @@ public class EcranPrincipal extends Ecran {
 		if (this.boutonStartPartie.isClique(screenX, screenY)) {
 			this.ecranManager.ecranLaby.create(this.ecranManager);
 			this.ecranManager.initialiserEcran(this.ecranManager.ecranLaby);
+			this.ecranManager.ecranHudLaby.joueurService = this.ecranManager.ecranLaby.joueurService;
 		}
 		this.boutonLoadPartie.isClique(screenX, screenY);
 

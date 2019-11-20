@@ -1,6 +1,5 @@
 package com.ultraime.laby.monde;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -9,7 +8,7 @@ import box2dLight.RayHandler;
 
 public class Lumiere {
 	public RayHandler rayHandler;
-	private ConeLight coneLight;
+//	private ConeLight coneLight;
 
 	public Lumiere(final World world) {
 		// creation des éléments

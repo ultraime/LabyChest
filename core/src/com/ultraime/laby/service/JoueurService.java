@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.ultraime.game.gdxtraime.entite.EntiteVivante;
+import com.ultraime.game.gdxtraime.entite.metier.HabiliterGeneral;
 import com.ultraime.game.gdxtraime.parametrage.Parametre;
 
 import box2dLight.PointLight;
@@ -28,7 +29,10 @@ public class JoueurService {
 	public Body body;
 
 	// lumiere du personnage.
-	PointLight torche;
+	public PointLight torche;
+
+	// variable utilitaire
+	public float debut_chute = 0;
 
 	/**
 	 * @param rayHandler
@@ -39,47 +43,79 @@ public class JoueurService {
 	 */
 	public void initialiserTorchePersonnage(final RayHandler rayHandler, final Color color, final float distance) {
 		torche = new PointLight(rayHandler, 5000, color, distance, entiteJoueur.x, entiteJoueur.y);
-		torche.setSoftnessLength(distance/4);
-		
+		torche.setSoftnessLength(distance / 4);
+
 	}
 
 	public JoueurService(final EntiteVivante entiteJoueur, final Body body) {
 		this.entiteJoueur = entiteJoueur;
+		this.entiteJoueur.habiliter.sante[HabiliterGeneral.MAX] = 100;
+		this.entiteJoueur.habiliter.sante[HabiliterGeneral.ACTUEL] = 100;
 		this.body = body;
 	}
 
 	public void update() {
-		final Vector2 velocityActual = body.getLinearVelocity();
-		float vitesse = entiteJoueur.habiliter.vitesse * Parametre.VITESSE_DE_JEU;	
+
+		float vitesse = entiteJoueur.habiliter.vitesse * Parametre.VITESSE_DE_JEU;
 		if (body.getLinearVelocity().y > 0.3f) {
 			etat = Etat.SAUTE;
-		} else if (body.getLinearVelocity().y < -0.25f) {
+		} else if (body.getLinearVelocity().y < -1.5f) {
+			if (debut_chute == 0) {
+				debut_chute = body.getPosition().y;
+			}
 			etat = Etat.TOMBE;
 		} else if (body.getLinearVelocity().x > 0.01f || body.getLinearVelocity().x < -0.01f) {
 			etat = Etat.COURS;
-			if (direction.equals(Direction.DROITE)) {
-				SPEED += Gdx.graphics.getDeltaTime() * entiteJoueur.habiliter.acceleration * Parametre.VITESSE_DE_JEU;
-				if (SPEED > vitesse) {
-					SPEED = vitesse;
-				} else if (SPEED < 3f) {
-					SPEED = 3f;
-				}
-			} else if (direction.equals(Direction.GAUCHE)) {
-				SPEED -= Gdx.graphics.getDeltaTime() * entiteJoueur.habiliter.acceleration * Parametre.VITESSE_DE_JEU;
-				if (SPEED < -vitesse) {
-					SPEED = -vitesse;
-				} else if (SPEED > -3f) {
-					SPEED = -3f;
-				}
-			}
-			body.setLinearVelocity(SPEED, velocityActual.y);
+			gestionChute();
+			gestionCourse(vitesse);
 		} else {
+			gestionChute();
 			etat = Etat.NORMAL;
 		}
-		
+
 		this.entiteJoueur.x = body.getPosition().x * 64;
 		this.entiteJoueur.y = body.getPosition().y * 64;
 		torche.setPosition(this.entiteJoueur.x + 32, this.entiteJoueur.y + 32);
+	}
+
+	private void gestionChute() {
+		if (debut_chute != 0) {
+			final float fin_chute = body.getPosition().y;
+			final float hauteur_chute = debut_chute - fin_chute;
+			if (hauteur_chute >= 4f) {
+				int sante[] = this.entiteJoueur.habiliter.sante;
+				int degat = (int) (hauteur_chute * (hauteur_chute - 2));
+				sante[HabiliterGeneral.GAIN] = -(degat);
+				this.entiteJoueur.habiliter.gererGain(sante);
+
+				if (sante[HabiliterGeneral.ACTUEL] == 0) {
+					//TODO Ecran game over.
+					System.err.println("JoueurService : GameOVer");
+				}
+
+			}
+			debut_chute = 0;
+		}
+	}
+
+	private void gestionCourse(float vitesse) {
+		final Vector2 velocityActual = body.getLinearVelocity();
+		if (direction.equals(Direction.DROITE)) {
+			SPEED += Gdx.graphics.getDeltaTime() * entiteJoueur.habiliter.acceleration * Parametre.VITESSE_DE_JEU;
+			if (SPEED > vitesse) {
+				SPEED = vitesse;
+			} else if (SPEED < 3f) {
+				SPEED = 3f;
+			}
+		} else if (direction.equals(Direction.GAUCHE)) {
+			SPEED -= Gdx.graphics.getDeltaTime() * entiteJoueur.habiliter.acceleration * Parametre.VITESSE_DE_JEU;
+			if (SPEED < -vitesse) {
+				SPEED = -vitesse;
+			} else if (SPEED > -3f) {
+				SPEED = -3f;
+			}
+		}
+		body.setLinearVelocity(SPEED, velocityActual.y);
 	}
 
 	public void keyDown(int keycode) {
@@ -90,8 +126,6 @@ public class JoueurService {
 		case Input.Keys.SPACE:
 			if (!etat.equals(Etat.SAUTE) && !etat.equals(Etat.TOMBE)) {
 				body.applyForceToCenter(0, entiteJoueur.habiliter.saut, true);
-			} else {
-				System.err.println("can't jump velocity = " + velocityActual.y +" etat :"+etat.toString());
 			}
 			break;
 		case Input.Keys.D:

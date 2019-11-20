@@ -1,5 +1,6 @@
 package com.ultraime.laby.ecran;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -22,7 +23,7 @@ public class EcranLaby extends Ecran {
 	private CameraGame cameraGame;
 	private LabyService labyService;
 	private Lumiere lumiere;
-	private JoueurService joueurService;
+	public JoueurService joueurService;
 
 	@Override
 	public void changerEcran(InputMultiplexer inputMultiplexer) {
@@ -51,8 +52,6 @@ public class EcranLaby extends Ecran {
 		
 		
 		this.labyService.initialiserCollision(lumiere.rayHandler);
-		// this.cameraGame.camera.position.x = 100;
-		// this.cameraGame.camera.position.y = 100;
 
 	}
 
@@ -94,6 +93,12 @@ public class EcranLaby extends Ecran {
 	@Override
 	public boolean keyUp(int keycode) {
 		joueurService.keyUp(keycode);
+		switch (keycode) {
+		case Input.Keys.E:
+			labyService.changementLumiere(joueurService.torche);
+		default:
+			break;
+		}
 		return false;
 	}
 
