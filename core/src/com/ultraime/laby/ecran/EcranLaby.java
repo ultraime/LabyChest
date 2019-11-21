@@ -24,6 +24,7 @@ public class EcranLaby extends Ecran {
 	private LabyService labyService;
 	private Lumiere lumiere;
 	public JoueurService joueurService;
+	private boolean isDispose = false;
 
 	@Override
 	public void changerEcran(InputMultiplexer inputMultiplexer) {
@@ -42,15 +43,14 @@ public class EcranLaby extends Ecran {
 
 		final EntiteVivante entiteJoueur = new EntiteVivante(60, 95, 40f);
 		final Body bodyJoueur = monde.addEntiteVivante(entiteJoueur);
-		joueurService = new JoueurService(entiteJoueur, bodyJoueur);
+		joueurService = new JoueurService(entiteJoueur, bodyJoueur, this.ecranManager);
 
 		this.cameraGame.camera.position.x = entiteJoueur.x * 64;
 		this.cameraGame.camera.position.y = entiteJoueur.y * 64;
 
 		this.lumiere = new Lumiere(monde.worldAffichage);
 		joueurService.initialiserTorchePersonnage(lumiere.rayHandler, new Color(0x540000FF), 500f);
-		
-		
+
 		this.labyService.initialiserCollision(lumiere.rayHandler);
 
 	}
@@ -72,16 +72,20 @@ public class EcranLaby extends Ecran {
 	public void render() {
 		updateCamera();
 		this.joueurService.update();
-		this.batch.begin();
-		this.monde.render();
-		this.monde.renderDebug(cameraGame.camera);
-		this.batch.end();
-		this.lumiere.renderLumiere(cameraGame.camera);
+		if (!isDispose) {
+			this.batch.begin();
+			this.monde.render();
+			this.monde.renderDebug(cameraGame.camera);
+			this.batch.end();
+			this.lumiere.renderLumiere(cameraGame.camera);
+		}
 	}
 
 	@Override
 	public void dispose() {
 		this.batch.dispose();
+		this.monde.dispose();
+		isDispose = true;
 	}
 
 	@Override

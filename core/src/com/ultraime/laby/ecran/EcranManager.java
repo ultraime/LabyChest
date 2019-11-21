@@ -12,6 +12,7 @@ public class EcranManager extends EcranManagerAbstract {
 
 	public EcranLaby ecranLaby;
 	public EcranHud ecranHudLaby;
+	public EcranGameOver ecranGameOver;
 
 	@Override
 	public void create() {
@@ -27,7 +28,9 @@ public class EcranManager extends EcranManagerAbstract {
 
 		ecranHudLaby = new EcranHud();
 		ecranHudLaby.create(this);
-		
+
+		ecranGameOver = new EcranGameOver();
+		ecranGameOver.create(this);
 	}
 
 	@Override

@@ -8,11 +8,14 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.ultraime.game.gdxtraime.entite.EntiteVivante;
 import com.ultraime.game.gdxtraime.entite.metier.HabiliterGeneral;
 import com.ultraime.game.gdxtraime.parametrage.Parametre;
+import com.ultraime.laby.ecran.EcranManager;
 
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
 
 public class JoueurService {
+	
+	private EcranManager ecranManager;
 	public enum Etat {
 		NORMAL, COURS, SAUTE, TOMBE;
 	}
@@ -47,11 +50,12 @@ public class JoueurService {
 
 	}
 
-	public JoueurService(final EntiteVivante entiteJoueur, final Body body) {
+	public JoueurService(final EntiteVivante entiteJoueur, final Body body,final EcranManager ecranManager) {
 		this.entiteJoueur = entiteJoueur;
 		this.entiteJoueur.habiliter.sante[HabiliterGeneral.MAX] = 100;
 		this.entiteJoueur.habiliter.sante[HabiliterGeneral.ACTUEL] = 100;
 		this.body = body;
+		this.ecranManager = ecranManager;
 	}
 
 	public void update() {
@@ -89,8 +93,8 @@ public class JoueurService {
 				this.entiteJoueur.habiliter.gererGain(sante);
 
 				if (sante[HabiliterGeneral.ACTUEL] == 0) {
-					//TODO Ecran game over.
-					System.err.println("JoueurService : GameOVer");
+					this.ecranManager.initialiserEcran(this.ecranManager.ecranGameOver);
+//					this.ecranManager.ecranLaby.dispose();
 				}
 
 			}

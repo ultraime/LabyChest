@@ -106,8 +106,8 @@ public class Monde {
 	}
 
 	/**
-	 * Ajoute une entité au monde.
-	 * Retourne le body de l'entité crée
+	 * Ajoute une entité au monde. Retourne le body de l'entité crée
+	 * 
 	 * @param entiteVivante
 	 * @return Body body
 	 */
@@ -146,8 +146,7 @@ public class Monde {
 	}
 
 	/**
-	 * @param OrthographicCamera
-	 *            camera
+	 * @param OrthographicCamera camera
 	 */
 	public void renderDebug(final OrthographicCamera camera) {
 		if (Parametre.MODE_DEBUG) {
@@ -231,6 +230,14 @@ public class Monde {
 	public void updateCamera(OrthographicCamera camera) {
 		batch.setProjectionMatrix(camera.combined);
 		carte.updateCamera(camera);
+	}
+
+	public void dispose() {
+		this.batch.dispose();
+		this.world.dispose();
+		this.worldAffichage.dispose();
+		this.debugRenderer.dispose();
+		this.carte.dispose();
 	}
 
 }

@@ -74,4 +74,9 @@ public class Carte {
 		}
 	}
 
+	public void dispose() {
+		this.rendererMap.dispose();
+		this.tiledMap.dispose();
+	}
+
 }

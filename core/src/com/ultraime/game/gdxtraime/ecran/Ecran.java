@@ -37,4 +37,5 @@ public abstract class Ecran implements InputProcessor {
 	 */
 	public abstract void dispose();
 
+
 }
