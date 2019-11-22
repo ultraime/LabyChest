@@ -10,9 +10,9 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.ultraime.game.gdxtraime.carte.Carte;
 import com.ultraime.game.gdxtraime.ecran.Ecran;
 import com.ultraime.game.gdxtraime.ecran.EcranManagerAbstract;
-import com.ultraime.game.gdxtraime.entite.EntiteVivante;
 import com.ultraime.game.gdxtraime.monde.CameraGame;
 import com.ultraime.game.gdxtraime.monde.Monde;
+import com.ultraime.laby.EntiteJoueur;
 import com.ultraime.laby.monde.Lumiere;
 import com.ultraime.laby.service.JoueurService;
 import com.ultraime.laby.service.LabyService;
@@ -41,7 +41,7 @@ public class EcranLaby extends Ecran {
 		this.labyService = new LabyService(monde);
 		this.cameraGame = new CameraGame();
 
-		final EntiteVivante entiteJoueur = new EntiteVivante(60, 95, 40f);
+		final EntiteJoueur entiteJoueur = new EntiteJoueur(60, 95, 40f);
 		final Body bodyJoueur = monde.addEntiteVivante(entiteJoueur);
 		joueurService = new JoueurService(entiteJoueur, bodyJoueur, this.ecranManager);
 

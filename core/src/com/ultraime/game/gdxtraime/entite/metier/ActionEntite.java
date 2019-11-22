@@ -114,7 +114,8 @@ public abstract class ActionEntite implements Comparable<ActionEntite>, Serializ
 						evAfficher.x = body.getPosition().x;
 						evAfficher.y = body.getPosition().y;
 						if (direction != -1) {
-							evAfficher.setDirection(direction);
+							//TODO direction à set
+//							evAfficher.setDirection(direction);
 						}
 						break;
 					}

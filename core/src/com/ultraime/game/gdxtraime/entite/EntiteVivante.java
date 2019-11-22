@@ -32,7 +32,6 @@ public class EntiteVivante extends Entite implements Serializable {
 
 	// pour l'animation
 	protected AnimationManager animationManager;
-	protected int direction = 0;
 
 	// pour le deplacement
 	private ArrayDeque<Noeud> listeDeNoeudDeplacement;
@@ -42,11 +41,16 @@ public class EntiteVivante extends Entite implements Serializable {
 	public HabiliterGeneral habiliter;
 
 	// etat de l'entite
-	public Etat etat = Etat.NORMAL;
-
-	public static enum Etat {
-		NORMAL
+	public enum Etat {
+		NORMAL, COURS, SAUTE, TOMBE;
 	}
+
+	public enum Direction {
+		HAUT, BAS, GAUCHE, DROITE, AUCUNE
+	}
+
+	public Etat etat = Etat.NORMAL;
+	public Direction direction = Direction.AUCUNE;
 
 	// Autre
 	public String prenom = "Prenom par defaut";
@@ -71,7 +75,9 @@ public class EntiteVivante extends Entite implements Serializable {
 	 * @param posY
 	 */
 	public void render(final SpriteBatch batch, final float posX, final float posY) {
-		// this.animationManager.render(batch, posX, posY, this.direction);
+		if (animationManager != null) {
+			this.animationManager.render(batch, posX, posY, 0);
+		}
 	}
 
 	public List<ActionEntite> getListeAction() {
@@ -101,14 +107,6 @@ public class EntiteVivante extends Entite implements Serializable {
 
 	public void setCercleShape(Circle cercleShape) {
 		this.cercleShape = cercleShape;
-	}
-
-	public int getDirection() {
-		return direction;
-	}
-
-	public void setDirection(int direction) {
-		this.direction = direction;
 	}
 
 }
