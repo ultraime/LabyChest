@@ -15,6 +15,8 @@ public class EntiteJoueur extends EntiteVivante {
 
 	protected AnimationManager animationIdlGauche;
 	protected AnimationManager animationIdlDroite;
+	
+	public Direction lastDirection = Direction.DROITE;
 
 	public EntiteJoueur(float x, float y, float radius) {
 		super(x, y, radius);
@@ -39,7 +41,11 @@ public class EntiteJoueur extends EntiteVivante {
 	 */
 	public void render(final SpriteBatch batch, final float posX, final float posY) {
 		if (animationManager != null) {
-			this.animationManager.render(batch, posX, posY, 0);
+			if(this.lastDirection == Direction.DROITE) {
+				this.animationIdlDroite.render(batch, posX, posY, 0);
+			}else {
+				this.animationIdlGauche.render(batch, posX, posY, 0);
+			}
 		}
 	}
 

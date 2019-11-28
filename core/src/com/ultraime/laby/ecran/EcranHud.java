@@ -3,14 +3,11 @@ package com.ultraime.laby.ecran;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.ultraime.game.gdxtraime.ecran.Ecran;
 import com.ultraime.game.gdxtraime.ecran.EcranManagerAbstract;
-import com.ultraime.game.gdxtraime.entite.EntiteVivante;
 import com.ultraime.game.gdxtraime.entite.metier.HabiliterGeneral;
-import com.ultraime.game.gdxtraime.parametrage.Parametre;
 import com.ultraime.laby.service.JoueurService;
 
 public class EcranHud extends Ecran {

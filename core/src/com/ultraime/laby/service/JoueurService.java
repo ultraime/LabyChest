@@ -130,10 +130,12 @@ public class JoueurService {
 		case Input.Keys.D:
 			body.setLinearVelocity(SPEED + 3f, velocityActual.y);
 			entiteJoueur.direction = Direction.DROITE;
+			entiteJoueur.lastDirection = Direction.DROITE;
 			break;
 		case Input.Keys.Q:
 			body.setLinearVelocity(SPEED - 3f, velocityActual.y);
 			entiteJoueur.direction = Direction.GAUCHE;
+			entiteJoueur.lastDirection = Direction.GAUCHE;
 			break;
 		default:
 			break;
