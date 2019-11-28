@@ -41,7 +41,7 @@ public class EcranLaby extends Ecran {
 		this.labyService = new LabyService(monde);
 		this.cameraGame = new CameraGame();
 
-		final EntiteJoueur entiteJoueur = new EntiteJoueur(60, 95, 40f);
+		final EntiteJoueur entiteJoueur = new EntiteJoueur(61, 90, 40f);
 		final Body bodyJoueur = monde.addEntiteVivante(entiteJoueur);
 		joueurService = new JoueurService(entiteJoueur, bodyJoueur, this.ecranManager);
 
