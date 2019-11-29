@@ -15,6 +15,7 @@ public class EcranGameOver extends Ecran {
 	private Bouton boutonRejouer;
 	private Bouton boutonQuitter;
 	private Sprite background;
+	private Sprite gameOver;
 	public boolean isDispose = false;
 	@Override
 	public void changerEcran(InputMultiplexer inputMultiplexer) {
@@ -35,7 +36,10 @@ public class EcranGameOver extends Ecran {
 				Bouton.CLASSIQUE);
 		background = new Sprite( new Texture(Gdx.files.internal("images/bouton/btn_over.png")));
 		this.background.setSize(Parametre.LARGEUR_ECRAN, Parametre.HAUTEUR_ECRAN);
-
+		
+		
+		gameOver = new Sprite( new Texture(Gdx.files.internal("images/menu/game_over.png")));
+		gameOver.setPosition(Parametre.x(752),700);
 	}
 
 	@Override
@@ -43,6 +47,7 @@ public class EcranGameOver extends Ecran {
 		
 		this.batch.begin();
 		this.background.draw(batch);
+		this.gameOver.draw(batch);
 		this.boutonRejouer.render(batch);
 		this.boutonQuitter.render(batch);
 		this.batch.end();

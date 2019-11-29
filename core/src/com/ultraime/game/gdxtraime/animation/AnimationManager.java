@@ -24,6 +24,7 @@ public class AnimationManager implements Serializable {
 	// pour que les plantes ne bouge pas en même temps
 	private float tempsAnimation = 0;
 	private String lienImage;
+	
 
 	/**
 	 * @param texture
@@ -115,13 +116,21 @@ public class AnimationManager implements Serializable {
 			creerAnimationByLienImage();
 		}
 		this.tempsAnimation += Gdx.graphics.getDeltaTime();
-		// if (this.tempsAnimation > 1000) {
-		// this.tempsAnimation = 1;
-		// }
 		this.regionCourante = (TextureRegion) this.animation[nbLigne].getKeyFrame(this.tempsAnimation, true);
 		batch.draw(this.regionCourante, x, y, this.largeur, this.hauteur);
 	}
-
+	/**
+	 * @param batch
+	 * @param x
+	 * @param y
+	 * @param nbLigne
+	 */
+	public void renderStop(final SpriteBatch batch, final float x, final float y, final int nbLigne) {
+		this.tempsAnimation += Gdx.graphics.getDeltaTime();
+		this.regionCourante = (TextureRegion) this.animation[nbLigne].getKeyFrame(this.tempsAnimation, false);
+		
+		batch.draw(this.regionCourante, x, y, this.largeur, this.hauteur);
+	}
 	/**
 	 * @param big_largeur
 	 * @param small_largeur
